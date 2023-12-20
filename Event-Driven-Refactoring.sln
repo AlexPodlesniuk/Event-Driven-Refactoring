@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShoppo", "eShoppo\eShoppo.csproj", "{D412F41D-6C38-4760-824C-D8F2908E14E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks.csproj", "{0D969182-A741-4857-BDF6-D7319F6735A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D412F41D-6C38-4760-824C-D8F2908E14E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D412F41D-6C38-4760-824C-D8F2908E14E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D412F41D-6C38-4760-824C-D8F2908E14E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D412F41D-6C38-4760-824C-D8F2908E14E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D969182-A741-4857-BDF6-D7319F6735A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D969182-A741-4857-BDF6-D7319F6735A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D969182-A741-4857-BDF6-D7319F6735A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D969182-A741-4857-BDF6-D7319F6735A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

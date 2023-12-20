@@ -1,0 +1,137 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/eShoppo/eShoppo.csproj": {}
+  },
+  "projects": {
+    "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/BuildingBlocks.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/BuildingBlocks.csproj",
+        "projectName": "BuildingBlocks",
+        "projectPath": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/BuildingBlocks.csproj",
+        "packagesPath": "/Users/alexwork/.nuget/packages/",
+        "outputPath": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alexwork/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/eShoppo/eShoppo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/eShoppo/eShoppo.csproj",
+        "projectName": "eShoppo",
+        "projectPath": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/eShoppo/eShoppo.csproj",
+        "packagesPath": "/Users/alexwork/.nuget/packages/",
+        "outputPath": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/eShoppo/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alexwork/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/BuildingBlocks.csproj": {
+                "projectPath": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/BuildingBlocks.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

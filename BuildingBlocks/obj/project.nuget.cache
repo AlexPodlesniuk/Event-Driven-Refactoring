@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "Pc+oY1T0BiUv7U4oCfgnJuvTSgQTkjNmh8Jih7iAH8e+8zEVVRqdCDHUC54yVYqf+HlIc5JDkaU8M/tPUu3ewg==",
+  "success": true,
+  "projectFilePath": "/Users/alexwork/Documents/projects/eventing/Event-Driven-Refactoring/BuildingBlocks/BuildingBlocks.csproj",
+  "expectedPackageFiles": [
+    "/Users/alexwork/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/microsoft.extensions.options/8.0.0/microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "/Users/alexwork/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
