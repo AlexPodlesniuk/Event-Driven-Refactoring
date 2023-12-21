@@ -8,13 +8,8 @@ public class MediatrPublisher : IEventPublisher
 
     public MediatrPublisher(IPublisher publisher) =>  _publisher = publisher;
 
-    public void Publish(IDomainEvent domainEvent)
+    public Task Publish(IDomainEvent domainEvent)
     {
-        _publisher.Publish(domainEvent);
+        return _publisher.Publish(domainEvent);
     }
-}
-
-public interface IEventPublisher
-{
-    void Publish(IDomainEvent domainEvent);
 }

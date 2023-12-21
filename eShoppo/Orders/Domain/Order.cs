@@ -10,7 +10,7 @@ public class Order(string id) : AggregateRoot(id)
     public void Submit()
     {
         IsSubmitted = true;
-        RaiseEvent(new OrderSubmitted(this));
+        RaiseEvent(new OrderSubmitted(Id, DateTime.UtcNow));
     }
 
     public override string ToString() => JsonSerializer.Serialize(this);

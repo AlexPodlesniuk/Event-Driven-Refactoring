@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace BuildingBlocks;
@@ -15,11 +14,11 @@ public class Repository
         _logger = logger;
     }
 
-    public void Save(AggregateRoot aggregateRoot)
+    public async Task Save(AggregateRoot aggregateRoot)
     {
         foreach (var @event in aggregateRoot.GetEvents())
         {
-            _eventPublisher.Publish(@event);
+            await _eventPublisher.Publish(@event);
         }
         
         aggregateRoot.ClearEvents();

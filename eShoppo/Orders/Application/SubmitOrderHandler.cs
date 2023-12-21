@@ -13,13 +13,13 @@ internal class SubmitOrderHandler: IRequestHandler<SubmitOrder, Order>
         _repository = repository;
     }
 
-    public Task<Order> Handle(SubmitOrder request, CancellationToken cancellationToken)
+    public async Task<Order> Handle(SubmitOrder request, CancellationToken cancellationToken)
     {
         var order = new Order(request.OrderId);
         order.Submit();
         
-        _repository.Save(order);
-        
-        return Task.FromResult(order);
+        await _repository.Save(order);
+
+        return order;
     }
 }

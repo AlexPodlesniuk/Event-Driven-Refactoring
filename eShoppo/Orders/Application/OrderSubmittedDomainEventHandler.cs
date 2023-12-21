@@ -1,9 +1,9 @@
 using eShoppo.Orders.Domain;
-using MediatR;
+using MassTransit;
 
 namespace eShoppo.Orders.Application;
 
-internal class OrderSubmittedDomainEventHandler : INotificationHandler<OrderSubmitted>
+public class OrderSubmittedDomainEventHandler : IConsumer<OrderSubmitted>
 {
     private readonly ILogger<OrderSubmittedDomainEventHandler> _logger;
 
@@ -12,9 +12,9 @@ internal class OrderSubmittedDomainEventHandler : INotificationHandler<OrderSubm
         _logger = logger;
     }
 
-    public Task Handle(OrderSubmitted notification, CancellationToken cancellationToken)
+    public Task Consume(ConsumeContext<OrderSubmitted> context)
     {
-        _logger.LogInformation($"Order history is created for order {notification.SubmittedOrder}");
+        _logger.LogInformation($"Order history is created for order {context.Message}");
         return Task.CompletedTask;
     }
 }
