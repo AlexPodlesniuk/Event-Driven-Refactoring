@@ -3,16 +3,17 @@ using eShoppo.Orders.Contracts;
 
 namespace eShoppo.Orders.Domain.Order;
 
-public class Order(string id, string customerId, OrderStatus orderStatus, List<OrderItem> items) : AggregateRoot(id)
+public class Order(string id, string customerId, OrderStatus orderStatus) : AggregateRoot(id)
 {
     public string CustomerId { get; } = customerId;
+    private List<OrderLine> _orderLines = new();
     public OrderStatus Status { get; private set; } = orderStatus;
-    public IReadOnlyList<OrderItem> OrderItems => items.AsReadOnly();
-    public int TotalItems => items.Sum(x => x.Quantity);
-    public decimal TotalPrice => items.Sum(x => x.Price * x.Quantity);
+    public IReadOnlyList<OrderLine> OrderItems => _orderLines.AsReadOnly();
+    public int TotalItems => _orderLines.Sum(x => x.Item.Quantity);
+    public decimal TotalPrice => _orderLines.Sum(x => x.Price * x.Item.Quantity);
     
-    public static Order NewOrder(string customerId, List<OrderItem> orderItems) 
-        => new(Guid.NewGuid().ToString(), customerId, OrderStatus.Undefined, orderItems);
+    public static Order NewOrder(string customerId) 
+        => new(Guid.NewGuid().ToString(), customerId, OrderStatus.Undefined);
 
     public void Create()
     {
@@ -37,6 +38,8 @@ public class Order(string id, string customerId, OrderStatus orderStatus, List<O
         ChangeStatus(OrderStatus.Paid);
         RaiseEvent(new OrderPaid(Id, DateTime.UtcNow));
     }
+    
+    public void AddOrderLine(OrderItem orderItem, decimal price) =>  _orderLines.Add(new OrderLine(orderItem, price));
     
     private void ChangeStatus(OrderStatus status)
     {

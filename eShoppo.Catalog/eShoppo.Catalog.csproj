@@ -1,15 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj" />
       <ProjectReference Include="..\eShoppo.Catalog.Contracts\eShoppo.Catalog.Contracts.csproj" />
-      <ProjectReference Include="..\eShoppo.Orders.Contracts\eShoppo.Orders.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

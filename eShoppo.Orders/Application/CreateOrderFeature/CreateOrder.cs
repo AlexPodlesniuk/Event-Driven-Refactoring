@@ -1,4 +1,4 @@
-using eShoppo.Orders.Domain.Order;
+using eShoppo.Orders.Contracts;
 using MediatR;
 
 namespace eShoppo.Orders.Application.CreateOrderFeature;

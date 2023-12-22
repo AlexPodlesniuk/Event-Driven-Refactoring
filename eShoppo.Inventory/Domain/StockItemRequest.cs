@@ -25,4 +25,4 @@ public class StockItemRequest : AggregateRoot
     }
 }
 
-public record StockItem(string ProductId, int Quantity);
+public record StockItem(string ProductSku, int Quantity);

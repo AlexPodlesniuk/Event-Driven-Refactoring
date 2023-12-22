@@ -1,4 +1,5 @@
 using BuildingBlocks;
+using eShoppo.Catalog.Contracts;
 using eShoppo.Inventory.Domain;
 using eShoppo.Orders.Contracts;
 using MassTransit;
@@ -8,29 +9,33 @@ namespace eShoppo.Inventory.Application.OrderSubmittedFeature;
 
 public class Handler : IConsumer<OrderSubmitted>
 {
-    private readonly IRequestClient<FindOrderRequest> _requestClient;
+    private readonly IRequestClient<FindOrderRequest> _orderRequestClient;
+    private readonly IRequestClient<FindProductRequest> _productRequestClient;
     private readonly Repository<StockItemRequest> _stockItemRequestRepository;
     private readonly ILogger<Handler> _logger;
 
 
-    public Handler(IRequestClient<FindOrderRequest> requestClient, Repository<StockItemRequest> stockItemRequestRepository, ILogger<Handler> logger)
+    public Handler(IRequestClient<FindOrderRequest> orderRequestClient, IRequestClient<FindProductRequest> productRequestClient, Repository<StockItemRequest> stockItemRequestRepository, ILogger<Handler> logger)
     {
-        _requestClient = requestClient;
+        _orderRequestClient = orderRequestClient;
+        _productRequestClient = productRequestClient;
         _stockItemRequestRepository = stockItemRequestRepository;
         _logger = logger;
     }
 
     public async Task Consume(ConsumeContext<OrderSubmitted> context)
     {
-        var orderResponse = await _requestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var orderResponse = await _orderRequestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
         var order = orderResponse.Message;
         var stockRequest = new StockItemRequest(order.OrderId);
         foreach (var orderItem in order.OrderItems)
         {
-            stockRequest.AddItem(orderItem.ProductId, orderItem.Quantity);
+            var productResponse = await _productRequestClient.GetResponse<ProductDto>(new FindProductRequest(orderItem.ProductId));
+            stockRequest.AddItem(productResponse.Message.Sku, orderItem.Quantity);
+            
+            _logger.LogInformation($"Put on hold {orderItem.Quantity} items of {productResponse.Message.Sku})");
         }
 
         await _stockItemRequestRepository.Save(stockRequest);
-        _logger.LogInformation($"Inventory will be booked for order {context.Message} for total items {order.TotalItems}");
     }
 }

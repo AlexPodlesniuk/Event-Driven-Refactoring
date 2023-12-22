@@ -1,4 +1,3 @@
-using BuildingBlocks;
 using eShoppo.Orders.Contracts;
 using MassTransit;
 using Microsoft.Extensions.Logging;
