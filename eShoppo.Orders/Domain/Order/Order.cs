@@ -16,30 +16,31 @@ public class Order(string id, string customerId, OrderStatus orderStatus, List<O
 
     public void Create()
     {
-        Status = OrderStatus.Created;
+        ChangeStatus(OrderStatus.Created);
         RaiseEvent(new OrderCreated(Id, DateTime.UtcNow));
     }
     
     public void Submit()
     {
-        Status = OrderStatus.Submitted;
+        ChangeStatus(OrderStatus.Submitted);
         RaiseEvent(new OrderSubmitted(Id, DateTime.UtcNow));
-    }
-    
-    public void AddItem(string productId, int quantity)
-    {
-        items.Add(new OrderItem(productId, quantity));
     }
 
     public void Cancel()
     {
-        Status = OrderStatus.Cancelled;
+        ChangeStatus(OrderStatus.Cancelled);
         RaiseEvent(new OrderCancelled(Id, DateTime.UtcNow));
     }
     
     public void MarkAsPaid()
     {
-        Status = OrderStatus.Paid;
+        ChangeStatus(OrderStatus.Paid);
         RaiseEvent(new OrderPaid(Id, DateTime.UtcNow));
+    }
+    
+    private void ChangeStatus(OrderStatus status)
+    {
+        Status = status;
+        RaiseEvent(new OrderStatusChanged(Id, status.ToString(), DateTime.UtcNow));
     }
 }

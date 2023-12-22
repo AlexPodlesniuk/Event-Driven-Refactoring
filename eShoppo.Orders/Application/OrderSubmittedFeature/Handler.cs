@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShoppo.Orders.Application.OrderSubmittedFeature;
 
-public class Handler : IConsumer<OrderSubmitted>
+public class Handler : IConsumer<OrderStatusChanged>
 {
     private readonly Repository<OrderHistory> _repository;
     private readonly ILogger<Handler> _logger;
@@ -18,13 +18,14 @@ public class Handler : IConsumer<OrderSubmitted>
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<OrderSubmitted> context)
+    public async Task Consume(ConsumeContext<OrderStatusChanged> context)
     {
         var message = context.Message;
         _logger.LogInformation($"Order history is created for order {context.Message}");
         
         var orderHistory = await _repository.GetById(message.OrderId) ?? new OrderHistory(message.OrderId);
-        orderHistory.Append(new HistoryItem(OrderStatus.Submitted, message.SubmittedOn));
+        var newStatus = Enum.Parse<OrderStatus>(message.OrderStatus);
+        orderHistory.Append(new HistoryItem(newStatus, message.SubmittedOn));
         
         await _repository.Save(orderHistory);
     }
