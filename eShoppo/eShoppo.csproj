@@ -12,6 +12,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj" />
+      <ProjectReference Include="..\eShoppo.Inventory\eShoppo.Inventory.csproj" />
+      <ProjectReference Include="..\eShoppo.Notifications\eShoppo.Notifications.csproj" />
+      <ProjectReference Include="..\eShoppo.Orders\eShoppo.Orders.csproj" />
+      <ProjectReference Include="..\eShoppo.Payments\eShoppo.Payments.csproj" />
     </ItemGroup>
 
 </Project>
