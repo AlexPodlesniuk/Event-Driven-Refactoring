@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShoppo.Notifications.Application.OrderSubmittedFeature;
 
-public class Handler : IConsumer<OrderSubmitted>
+internal class Handler : IConsumer<OrderSubmitted>
 {
     private readonly IRequestClient<FindOrderRequest> _ordersRequestClient;
     private readonly IRequestClient<FindProductRequest> _productRequestClient;

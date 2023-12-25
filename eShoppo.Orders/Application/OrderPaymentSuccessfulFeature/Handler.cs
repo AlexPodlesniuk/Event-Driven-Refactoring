@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShoppo.Orders.Application.OrderPaymentSuccessfulFeature;
 
-public class Handler : IConsumer<OrderPaid>
+internal class Handler : IConsumer<OrderPaid>
 {
     private readonly Repository<Order> _repository;
     private readonly ILogger<Handler> _logger;

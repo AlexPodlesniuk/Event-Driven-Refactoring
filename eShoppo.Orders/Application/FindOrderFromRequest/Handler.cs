@@ -5,7 +5,7 @@ using MassTransit;
 
 namespace eShoppo.Orders.Application.FindOrderFromRequest;
 
-public class Handler : IConsumer<FindOrderRequest>
+internal class Handler : IConsumer<FindOrderRequest>
 {
     private readonly Repository<Order> _repository;
 

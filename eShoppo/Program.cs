@@ -43,11 +43,11 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMassTransit(config =>
 {
     config.SetKebabCaseEndpointNameFormatter();
-    config.AddConsumers(typeof(InventoryTypeReference).Assembly);
-    config.AddConsumers(typeof(NotificationTypeReference).Assembly);
-    config.AddConsumers(typeof(OrdersTypeReference).Assembly);
-    config.AddConsumers(typeof(PaymentsTypeReference).Assembly);
-    config.AddConsumers(typeof(ProductTypeReference).Assembly);
+    config.RegisterInventoryConsumers();
+    config.RegisterNotificationConsumers();
+    config.RegisterOrderConsumers();
+    config.RegisterPaymentConsumers();
+    config.RegisterCatalogConsumers();
     
     config.AddRequestClient<FindOrderRequest>();
     config.AddRequestClient<FindProductRequest>();

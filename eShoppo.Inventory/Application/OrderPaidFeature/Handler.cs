@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShoppo.Inventory.Application.OrderPaidFeature;
 
-public class Handler : IConsumer<OrderPaid>
+internal class Handler : IConsumer<OrderPaid>
 {
     private readonly IRequestClient<FindOrderRequest> _requestClient;
     private readonly Repository<StockItemRequest> _stockItemRequestRepository;
