@@ -5,9 +5,9 @@ using eShoppo.Orders.Domain.OrderHistory;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace eShoppo.Orders.Application.OrderSubmittedFeature;
+namespace eShoppo.Orders.Application.OrderStatusChangedFeature;
 
-public class Handler : IConsumer<OrderStatusChanged>
+internal class Handler : IConsumer<OrderStatusChanged>
 {
     private readonly Repository<OrderHistory> _repository;
     private readonly ILogger<Handler> _logger;

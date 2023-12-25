@@ -5,7 +5,7 @@ using MassTransit;
 
 namespace eShoppo.Catalog.Application.FindProductFromRequest;
 
-public class Handler : IConsumer<FindProductRequest>
+internal class Handler : IConsumer<FindProductRequest>
 {
     private readonly Repository<Product> _repository;
 

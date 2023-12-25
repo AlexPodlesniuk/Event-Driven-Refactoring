@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShoppo.Notifications.Application.OrderCancelledFeature;
 
-public class Handler : IConsumer<OrderCancelled>
+internal class Handler : IConsumer<OrderCancelled>
 {
     private readonly IRequestClient<FindOrderRequest> _requestClient;
     private readonly ILogger<Handler> _logger;
