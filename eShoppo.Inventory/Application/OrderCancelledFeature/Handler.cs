@@ -22,7 +22,7 @@ public class Handler : IConsumer<OrderCancelled>
 
     public async Task Consume(ConsumeContext<OrderCancelled> context)
     {
-        var order = await _requestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var order = await _requestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
 
         await _stockItemRequestRepository.Remove(order.Message.OrderId);
         _logger.LogInformation($"Order {order.Message.OrderNumber} cancelled, stock item request will be released for order {order.Message}");

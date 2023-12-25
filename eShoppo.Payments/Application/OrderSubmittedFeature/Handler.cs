@@ -25,8 +25,8 @@ public class Handler : IConsumer<OrderSubmitted>
 
     public async Task Consume(ConsumeContext<OrderSubmitted> context)
     {
-        var order = await _orderRequestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
-        var product = await _productRequestClient.GetResponse<ProductDto>(new FindProductRequest(order.Message.OrderItems.First().ProductId));
+        var order = await _orderRequestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
+        var product = await _productRequestClient.GetResponse<FindProductResponse>(new FindProductRequest(order.Message.OrderItems.First().ProductId));
         var paymentPromise = new PaymentPromise(order.Message.OrderId, order.Message.TotalPrice)
         {
             ExpiredAt = DateTime.UtcNow.AddMinutes(product.Message.MaxPaymentTime)

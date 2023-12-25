@@ -25,12 +25,12 @@ public class Handler : IConsumer<OrderSubmitted>
 
     public async Task Consume(ConsumeContext<OrderSubmitted> context)
     {
-        var orderResponse = await _orderRequestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var orderResponse = await _orderRequestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
         var order = orderResponse.Message;
         var stockRequest = new StockItemRequest(order.OrderId);
         foreach (var orderItem in order.OrderItems)
         {
-            var productResponse = await _productRequestClient.GetResponse<ProductDto>(new FindProductRequest(orderItem.ProductId));
+            var productResponse = await _productRequestClient.GetResponse<FindProductResponse>(new FindProductRequest(orderItem.ProductId));
             stockRequest.AddItem(productResponse.Message.Sku, orderItem.Quantity);
             
             _logger.LogInformation($"Put on hold {orderItem.Quantity} items of {productResponse.Message.Sku})");

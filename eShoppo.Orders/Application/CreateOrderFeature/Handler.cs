@@ -23,7 +23,7 @@ internal class Handler : IRequestHandler<CreateOrder, string>
         
         foreach (var item in request.Items)
         {
-            var product = await _client.GetResponse<ProductDto>(new FindProductRequest(item.ProductId), cancellationToken);
+            var product = await _client.GetResponse<FindProductResponse>(new FindProductRequest(item.ProductId), cancellationToken);
             order.AddOrderLine(item, product.Message.Price);
         }
         
