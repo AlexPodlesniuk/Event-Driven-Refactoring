@@ -17,6 +17,6 @@ public class Handler : IConsumer<FindProductRequest>
     public async Task Consume(ConsumeContext<FindProductRequest> context)
     {
         var product = await _repository.GetById(context.Message.ProductId);
-        await context.RespondAsync(new ProductDto(product.Id, product.Name, product.Price, product.MaxPaymentTime, product.Sku));
+        await context.RespondAsync(new FindProductResponse(product.Id, product.Name, product.Price, product.MaxPaymentTime, product.Sku));
     }
 }

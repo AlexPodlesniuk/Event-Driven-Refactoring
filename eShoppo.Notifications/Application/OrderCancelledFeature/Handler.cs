@@ -19,7 +19,7 @@ public class Handler : IConsumer<OrderCancelled>
 
     public async Task Consume(ConsumeContext<OrderCancelled> context)
     {
-        var order = await _requestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var order = await _requestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
         _logger.LogInformation($"Notification about order {order.Message.OrderNumber} cancellation is sent to user {order.Message.CustomerId}");
     }
 }

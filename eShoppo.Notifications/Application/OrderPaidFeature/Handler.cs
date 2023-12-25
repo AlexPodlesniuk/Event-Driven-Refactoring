@@ -18,7 +18,7 @@ public class Handler : IConsumer<OrderPaid>
 
     public async Task Consume(ConsumeContext<OrderPaid> context)
     {
-        var order = await _requestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var order = await _requestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
         _logger.LogInformation($"Notification about order {order.Message.OrderNumber} successful payment is sent to user {order.Message.CustomerId}");
     }
 }

@@ -23,7 +23,7 @@ public class Handler : IConsumer<OrderPaid>
 
     public async Task Consume(ConsumeContext<OrderPaid> context)
     {
-        var order = await _requestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var order = await _requestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
         var stockRequest = await _stockItemRequestRepository.GetById(order.Message.OrderId) ?? throw new StockRequestIsNotFoundException(order.Message.OrderId);
         
         stockRequest.ConfirmBooking();

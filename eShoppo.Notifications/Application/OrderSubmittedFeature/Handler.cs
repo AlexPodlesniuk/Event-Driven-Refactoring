@@ -22,7 +22,7 @@ public class Handler : IConsumer<OrderSubmitted>
 
     public async Task Consume(ConsumeContext<OrderSubmitted> context)
     {
-        var order = await _ordersRequestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
+        var order = await _ordersRequestClient.GetResponse<FindOrderResponse>(new FindOrderRequest(context.Message.OrderId));
         var message = JsonSerializer.Serialize(order.Message.OrderItems);
         _logger.LogInformation($"Notification about order {order.Message.OrderNumber} submitting is sent to user {order.Message.CustomerId}: \nContent:{message}");
     }
