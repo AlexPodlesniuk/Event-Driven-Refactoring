@@ -1,6 +1,7 @@
 using BuildingBlocks;
 using eShoppo.Inventory.Domain;
 using eShoppo.Orders.Contracts;
+using eShoppo.Payments.Contracts;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
@@ -27,6 +28,6 @@ public class Handler : IConsumer<OrderPaid>
         
         stockRequest.ConfirmBooking();
         await _stockItemRequestRepository.Save(stockRequest);
-        _logger.LogInformation($"Order paid, stock items will be decreased from inventory {order}");
+        _logger.LogInformation($"Order {order.Message.OrderNumber} paid {order.Message.TotalPrice}, stock items will be decreased from inventory");
     }
 }

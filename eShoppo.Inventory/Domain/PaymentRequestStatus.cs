@@ -1,6 +1,6 @@
 namespace eShoppo.Inventory.Domain;
 
-public enum RequestStatus
+public enum PaymentRequestStatus
 {
     BookingCreated,
     BookingConfirmed

@@ -4,9 +4,9 @@ using eShoppo.Payments.Contracts;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace eShoppo.Orders.Application.PaymentSuccessfulFeature;
+namespace eShoppo.Orders.Application.OrderPaymentSuccessfulFeature;
 
-public class Handler : IConsumer<PaymentSuccessful>
+public class Handler : IConsumer<OrderPaid>
 {
     private readonly Repository<Order> _repository;
     private readonly ILogger<Handler> _logger;
@@ -17,7 +17,7 @@ public class Handler : IConsumer<PaymentSuccessful>
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<PaymentSuccessful> context)
+    public async Task Consume(ConsumeContext<OrderPaid> context)
     {
         var message = context.Message;
         var order = await _repository.GetById(message.OrderId) ?? throw new OrderNotFoundException(message.OrderId);

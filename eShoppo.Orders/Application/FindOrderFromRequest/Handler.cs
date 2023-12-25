@@ -17,6 +17,6 @@ public class Handler : IConsumer<FindOrderRequest>
     public async Task Consume(ConsumeContext<FindOrderRequest> context)
     {
         var order = await _repository.GetById(context.Message.OrderId);
-        await context.RespondAsync(new OrderDto(order!.Id, order.CustomerId, order.TotalItems, order.OrderItems.Select(oi => new OrderItemDto(oi.Item.ProductId, oi.Item.Quantity))));
+        await context.RespondAsync(new OrderDto(order!.Id, order.OrderNumber, order.CustomerId, order.TotalItems, order.OrderItems.Select(oi => new OrderItemDto(oi.Item.ProductId, oi.Item.Quantity))));
     }
 }

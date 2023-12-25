@@ -1,5 +1,5 @@
 using BuildingBlocks;
 
-namespace eShoppo.Orders.Contracts;
+namespace eShoppo.Payments.Contracts;
 
 public record OrderCancelled(string OrderId, DateTime SubmittedOn) : IDomainEvent;

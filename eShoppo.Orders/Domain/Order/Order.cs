@@ -6,7 +6,8 @@ namespace eShoppo.Orders.Domain.Order;
 public class Order(string id, string customerId, OrderStatus orderStatus) : AggregateRoot(id)
 {
     public string CustomerId { get; } = customerId;
-    private List<OrderLine> _orderLines = new();
+    public string OrderNumber => $"ON-{id}";
+    private readonly List<OrderLine> _orderLines = new();
     public OrderStatus Status { get; private set; } = orderStatus;
     public IReadOnlyList<OrderLine> OrderItems => _orderLines.AsReadOnly();
     public int TotalItems => _orderLines.Sum(x => x.Item.Quantity);
@@ -30,13 +31,11 @@ public class Order(string id, string customerId, OrderStatus orderStatus) : Aggr
     public void Cancel()
     {
         ChangeStatus(OrderStatus.Cancelled);
-        RaiseEvent(new OrderCancelled(Id, DateTime.UtcNow));
     }
     
     public void MarkAsPaid()
     {
         ChangeStatus(OrderStatus.Paid);
-        RaiseEvent(new OrderPaid(Id, DateTime.UtcNow));
     }
     
     public void AddOrderLine(OrderItem orderItem, decimal price) =>  _orderLines.Add(new OrderLine(orderItem, price));
