@@ -1,4 +1,4 @@
-using System.Text;
+using System.Text.Json;
 using eShoppo.Catalog.Contracts;
 using eShoppo.Orders.Contracts;
 using MassTransit;
@@ -23,19 +23,7 @@ public class Handler : IConsumer<OrderSubmitted>
     public async Task Consume(ConsumeContext<OrderSubmitted> context)
     {
         var order = await _ordersRequestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
-        var message = await ToMessage(order.Message.OrderItems);
-        _logger.LogInformation($"Notification about order submitting is sent to user {order.Message.CustomerId}: {message}");
-    }
-
-    private async Task<string> ToMessage(IEnumerable<OrderItemDto> orderItems)
-    {
-        var sb = new StringBuilder();
-        foreach (var orderItem in orderItems)
-        {
-            var productResponse = await _productRequestClient.GetResponse<ProductDto>(new FindProductRequest(orderItem.ProductId));
-            sb.AppendLine($"{orderItem.Quantity} x {productResponse.Message.Name}");
-        }
-
-        return sb.ToString();
+        var message = JsonSerializer.Serialize(order.Message.OrderItems);
+        _logger.LogInformation($"Notification about order {order.Message.OrderNumber} submitting is sent to user {order.Message.CustomerId}: \nContent:{message}");
     }
 }

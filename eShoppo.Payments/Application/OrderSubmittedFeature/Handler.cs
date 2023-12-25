@@ -27,7 +27,7 @@ public class Handler : IConsumer<OrderSubmitted>
     {
         var order = await _orderRequestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
         var product = await _productRequestClient.GetResponse<ProductDto>(new FindProductRequest(order.Message.OrderItems.First().ProductId));
-        var paymentPromise = new PaymentPromise(order.Message.OrderId)
+        var paymentPromise = new PaymentPromise(order.Message.OrderId, order.Message.TotalPrice)
         {
             ExpiredAt = DateTime.UtcNow.AddMinutes(product.Message.MaxPaymentTime)
         };

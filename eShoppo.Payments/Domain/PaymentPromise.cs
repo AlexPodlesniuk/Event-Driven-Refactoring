@@ -3,8 +3,9 @@ using eShoppo.Payments.Contracts;
 
 namespace eShoppo.Payments.Domain;
 
-public class PaymentPromise(string id) : AggregateRoot(id)
+public class PaymentPromise(string id, decimal total) : AggregateRoot(id)
 {
+    public decimal Total { get; } = total;
     public DateTime ExpiredAt { get; init; }
     public PaymentPromiseStatus Status { get; private set; } = PaymentPromiseStatus.WaitingForPayment;
 
@@ -12,13 +13,13 @@ public class PaymentPromise(string id) : AggregateRoot(id)
     public void MarkAsPaid()
     {
         Status = PaymentPromiseStatus.Paid;
-        RaiseEvent(new PaymentSuccessful(id));
+        RaiseEvent(new OrderPaid(id, DateTime.UtcNow));
     }
     
     public void MarkAsExpired()
     {
         Status = PaymentPromiseStatus.Expired;
-        RaiseEvent(new PaymentExpired(id));
+        RaiseEvent(new OrderCancelled(id, DateTime.UtcNow));
     }
 }
 

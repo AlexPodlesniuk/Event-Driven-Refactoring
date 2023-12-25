@@ -7,16 +7,15 @@ public class StockItemRequest : AggregateRoot
     private readonly List<StockItem> _bookedStockItems = new();
     public StockItemRequest(string id) : base(id)
     {
-        BookingStatus = RequestStatus.BookingCreated;
+        BookingStatus = PaymentRequestStatus.BookingCreated;
     }
     
    public IReadOnlyList<StockItem> BookedStockItems => _bookedStockItems.AsReadOnly();
-    public RequestStatus BookingStatus { get; private set; }
+    public PaymentRequestStatus BookingStatus { get; private set; }
     
     public void ConfirmBooking()
     {
-        BookingStatus = RequestStatus.BookingConfirmed;
-        // make some real steps for inventory confirmation
+        BookingStatus = PaymentRequestStatus.BookingConfirmed;
     }
     
     public void AddItem(string productId, int quantity)
@@ -24,5 +23,3 @@ public class StockItemRequest : AggregateRoot
         _bookedStockItems.Add(new StockItem(productId, quantity));
     }
 }
-
-public record StockItem(string ProductSku, int Quantity);

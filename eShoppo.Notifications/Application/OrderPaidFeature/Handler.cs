@@ -1,4 +1,5 @@
 using eShoppo.Orders.Contracts;
+using eShoppo.Payments.Contracts;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,6 @@ public class Handler : IConsumer<OrderPaid>
     public async Task Consume(ConsumeContext<OrderPaid> context)
     {
         var order = await _requestClient.GetResponse<OrderDto>(new FindOrderRequest(context.Message.OrderId));
-        _logger.LogInformation($"Notification about order successful payment is sent to user {order.Message.CustomerId}");
+        _logger.LogInformation($"Notification about order {order.Message.OrderNumber} successful payment is sent to user {order.Message.CustomerId}");
     }
 }

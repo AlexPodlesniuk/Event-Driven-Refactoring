@@ -4,9 +4,9 @@ using eShoppo.Payments.Contracts;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace eShoppo.Orders.Application.PaymentExpiredFeature;
+namespace eShoppo.Orders.Application.OrderPaymentCancelledFeature;
 
-public class Handler : IConsumer<PaymentExpired>
+public class Handler : IConsumer<OrderCancelled>
 {
     private readonly Repository<Order> _repository;
     private readonly ILogger<Handler> _logger;
@@ -17,7 +17,7 @@ public class Handler : IConsumer<PaymentExpired>
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<PaymentExpired> context)
+    public async Task Consume(ConsumeContext<OrderCancelled> context)
     {
         var message = context.Message;
         var order = await _repository.GetById(message.OrderId) ?? throw new OrderNotFoundException(message.OrderId);
