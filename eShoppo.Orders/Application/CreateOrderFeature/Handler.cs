@@ -1,21 +1,21 @@
 using BuildingBlocks;
-using eShoppo.Catalog.Contracts;
 using eShoppo.Orders.Domain.Order;
-using MassTransit;
+using eShoppo.Orders.Domain.Product;
 using MediatR;
 
 namespace eShoppo.Orders.Application.CreateOrderFeature;
 
 internal class Handler : IRequestHandler<CreateOrder, string>
 {
-    private readonly Repository<Order> _repository;
-    private readonly IRequestClient<FindProductRequest> _client;
+    private readonly Repository<Order> _ordersRepository;
+    private readonly Repository<OrderProduct> _productRepository;
 
-    public Handler(Repository<Order> repository, IRequestClient<FindProductRequest> client)
+    public Handler(Repository<Order> ordersRepository, Repository<OrderProduct> productRepository)
     {
-        _repository = repository;
-        _client = client;
+        _ordersRepository = ordersRepository;
+        _productRepository = productRepository;
     }
+
 
     public async Task<string> Handle(CreateOrder request, CancellationToken cancellationToken)
     {
@@ -23,13 +23,13 @@ internal class Handler : IRequestHandler<CreateOrder, string>
         
         foreach (var item in request.Items)
         {
-            var product = await _client.GetResponse<FindProductResponse>(new FindProductRequest(item.ProductId), cancellationToken);
-            order.AddOrderLine(item, product.Message.Price);
+            var product = await _productRepository.GetById(item.ProductId);
+            order.AddOrderLine(item, product.Price);
         }
         
         order.Create();
         
-        await _repository.Save(order);
+        await _ordersRepository.Save(order);
 
         return order.Id;
     }

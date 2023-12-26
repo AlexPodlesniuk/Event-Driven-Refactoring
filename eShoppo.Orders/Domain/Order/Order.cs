@@ -25,17 +25,19 @@ public class Order(string id, string customerId, OrderStatus orderStatus) : Aggr
     public void Submit()
     {
         ChangeStatus(OrderStatus.Submitted);
-        RaiseEvent(new OrderSubmitted(Id, DateTime.UtcNow));
+        RaiseEvent(new OrderSubmitted(Id, OrderNumber, OrderItems.Select(x => x.Item), TotalPrice, CustomerId, DateTime.UtcNow));
     }
 
     public void Cancel()
     {
         ChangeStatus(OrderStatus.Cancelled);
+        RaiseEvent(new OrderCancelled(Id, OrderNumber, CustomerId, DateTime.UtcNow));
     }
     
     public void MarkAsPaid()
     {
         ChangeStatus(OrderStatus.Paid);
+        RaiseEvent(new OrderPaid(Id, OrderNumber, CustomerId, DateTime.UtcNow));
     }
     
     public void AddOrderLine(OrderItem orderItem, decimal price) =>  _orderLines.Add(new OrderLine(orderItem, price));

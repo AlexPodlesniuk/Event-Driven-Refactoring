@@ -22,6 +22,9 @@ internal class Handler : IRequestHandler<CreateProduct, string>
             Sku = request.Sku,
             MaxPaymentTime = request.MaxPaymentTime
         };
+        
+        product.MarkAsInformationChanged();
+        
         await _repository.Save(product);
 
         return product.Id;

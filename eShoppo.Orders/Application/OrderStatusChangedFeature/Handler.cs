@@ -1,5 +1,4 @@
 using BuildingBlocks;
-using eShoppo.Orders.Contracts;
 using eShoppo.Orders.Domain.Order;
 using eShoppo.Orders.Domain.OrderHistory;
 using MassTransit;

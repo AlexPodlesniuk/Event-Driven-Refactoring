@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShoppo.Orders.Application.OrderPaymentCancelledFeature;
 
-internal class Handler : IConsumer<OrderCancelled>
+internal class Handler : IConsumer<PaymentFailed>
 {
     private readonly Repository<Order> _repository;
     private readonly ILogger<Handler> _logger;
@@ -17,7 +17,7 @@ internal class Handler : IConsumer<OrderCancelled>
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<OrderCancelled> context)
+    public async Task Consume(ConsumeContext<PaymentFailed> context)
     {
         var message = context.Message;
         var order = await _repository.GetById(message.OrderId) ?? throw new OrderNotFoundException(message.OrderId);

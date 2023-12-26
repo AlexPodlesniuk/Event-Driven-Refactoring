@@ -13,13 +13,13 @@ public class PaymentPromise(string id, decimal total) : AggregateRoot(id)
     public void MarkAsPaid()
     {
         Status = PaymentPromiseStatus.Paid;
-        RaiseEvent(new OrderPaid(id, DateTime.UtcNow));
+        RaiseEvent(new PaymentSuccessful(id, DateTime.UtcNow));
     }
     
     public void MarkAsExpired()
     {
         Status = PaymentPromiseStatus.Expired;
-        RaiseEvent(new OrderCancelled(id, DateTime.UtcNow));
+        RaiseEvent(new PaymentFailed(id, DateTime.UtcNow));
     }
 }
 

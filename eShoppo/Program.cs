@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 using BuildingBlocks;
 using eShoppo.Catalog;
 using eShoppo.Catalog.Application.CreateProductFeature;
-using eShoppo.Catalog.Contracts;
 using eShoppo.Inventory;
 using eShoppo.Notifications;
 using eShoppo.Orders;
@@ -10,7 +9,6 @@ using eShoppo.Orders.Application.CreateOrderFeature;
 using eShoppo.Orders.Application.FindOrderByIdFeature;
 using eShoppo.Orders.Application.FindOrderHistoryByIdFeature;
 using eShoppo.Orders.Application.SubmitOrderFeature;
-using eShoppo.Orders.Contracts;
 using eShoppo.Payments;
 using eShoppo.Payments.Application;
 using eShoppo.Payments.Application.PayOrderFeature;
@@ -48,9 +46,6 @@ builder.Services.AddMassTransit(config =>
     config.RegisterOrderConsumers();
     config.RegisterPaymentConsumers();
     config.RegisterCatalogConsumers();
-    
-    config.AddRequestClient<FindOrderRequest>();
-    config.AddRequestClient<FindProductRequest>();
     
     config.UsingRabbitMq((context, cfg) =>
     {
